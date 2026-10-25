@@ -1,0 +1,2 @@
+# Optional: installed/licensed Windows Origin is also required.
+originpro>=1.1,<2

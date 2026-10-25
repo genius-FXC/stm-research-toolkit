@@ -1,0 +1,216 @@
+{
+  "schema_version": 2,
+  "root": "..",
+  "tools": [
+    {
+      "id": "2d-lockin",
+      "name": "2D-lockin",
+      "category": "图像分析",
+      "folder": "modules/2d-lockin",
+      "entry": "app.py",
+      "mode": "native",
+      "description": "SXM 选峰、局域振幅/相位和 iFFT。原名 STM Fourier Analyzer，仅入口改名。",
+      "dependencies": "Python · NumPy · Pillow · Tkinter",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "band-analysis",
+      "name": "Band Analysis",
+      "category": "谱学分析",
+      "folder": "modules/band_analysis",
+      "entry": "app.py",
+      "mode": "native",
+      "description": "FFT 三维堆叠与 q–E 散射截面；逐能量手动选峰、高斯+线性背景拟合、峰宽/误差及 Q=2k 模型能带参数推断。散射原点 q=0。",
+      "dependencies": "Python · PySide6 · NumPy · SciPy · Matplotlib · 独立 pyqtgraph/OpenGL 依赖",
+      "agent_context": [
+        "AGENTS.md",
+        "modules/band_analysis/README.md"
+      ]
+    },
+    {
+      "id": "line-spectrum",
+      "name": "STM 手动画线线谱工具",
+      "category": "谱学分析",
+      "folder": "modules/stm_line_spectrum_tool",
+      "entry": "server.py",
+      "mode": "web",
+      "description": "原线谱 UI 在独立桌面窗口显示，不跳转浏览器；原数据处理与导出保持。",
+      "dependencies": "Python · SciPy · Matplotlib · Pillow；Origin 导出另需接口",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "3ds-sxm",
+      "name": "3DS → SXM 导出",
+      "category": "转换与导出",
+      "folder": "modules/nanonis_converter",
+      "entry": "scripts/export_3ds_to_sxm.py",
+      "mode": "batch",
+      "description": "选择 3DS 文件或目录及输出空目录，设置偏压排序；保留原始 Z 与 LI X 数值。",
+      "dependencies": "Python · NumPy · Pillow",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "fft-stp",
+      "name": "SXM → FFT/STP",
+      "category": "图像分析",
+      "folder": "modules/sxm_fft_stp_20261013",
+      "entry": "fft_stp_batch.py",
+      "mode": "batch",
+      "description": "选择 SXM 和输出目录，调用既有 Fourier 核心生成 WSxM STP；处理设置沿用原约定。",
+      "dependencies": "Python · NumPy · 自写 SXM reader",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "batch-ifft",
+      "name": "批量 iFFT",
+      "category": "图像分析",
+      "folder": "modules/sxm_fft_stp_20261013",
+      "entry": "bragg_ifft_trials.py",
+      "mode": "batch",
+      "description": "选择 SXM、Q 坐标、mask 半径和输出格式，调用既有相位保留 iFFT 核心。",
+      "dependencies": "Python 科学计算环境 · 相邻 reader",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "origin-extract",
+      "name": "Origin 曲线提取",
+      "category": "转换与导出",
+      "folder": "modules/kondo/extract",
+      "entry": "extractOriginGui.m",
+      "mode": "native",
+      "description": "原 MATLAB Origin 提取界面独立打开，保留选曲线及导出操作。",
+      "dependencies": "MATLAB · Origin · Windows COM",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "origin-project",
+      "name": "Origin 项目生成",
+      "category": "转换与导出",
+      "folder": "modules/stm_line_spectrum_tool",
+      "entry": "origin_export.py",
+      "mode": "ai",
+      "description": "复用线谱工具现有 Origin 导出实现；不是独立通用脚本。",
+      "dependencies": "Origin · originpro / OriginExt · 线谱工具",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "curve-export",
+      "name": "曲线导出",
+      "category": "转换与导出",
+      "folder": "modules/kondo/main-program",
+      "entry": "saveKondoFitResult.m",
+      "mode": "ai",
+      "description": "拟合曲线导出；普通 Origin 曲线用 Origin 提取器，线谱用原线谱工具导出。",
+      "dependencies": "MATLAB；其他曲线按来源选择现有导出器",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "kondo",
+      "name": "Kondo 拟合",
+      "category": "拟合",
+      "folder": "modules/kondo/main-program",
+      "entry": "kondoFitGui.m",
+      "mode": "native",
+      "description": "原 MATLAB 拟合 GUI 独立打开；保留温度、锁相展宽、参数和导出。",
+      "dependencies": "MATLAB · Optimization Toolbox",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "ternes",
+      "name": "Ternes 自旋激发拟合",
+      "category": "拟合",
+      "folder": "modules/ternes",
+      "entry": "main/Spin-Gui-1.0.sce",
+      "mode": "ai",
+      "description": "保留 Markus Ternes 核心与已有自动化脚本，不重写拟合功能。",
+      "dependencies": "Scilab；批处理可能另需 Python / Origin",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "peaks",
+      "name": "峰位分析",
+      "category": "谱学分析",
+      "folder": "modules/stm_line_spectrum_tool/research_quicklooks/20261011_peak_position_gap",
+      "entry": "analyze.py",
+      "mode": "ai",
+      "description": "已有特定数据集分析脚本；先核对数据、峰定义与缺失值策略。",
+      "dependencies": "Python 科学计算环境 · 原始输入与上游结果",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "derivative",
+      "name": "二阶导数",
+      "category": "谱学分析",
+      "folder": "modules/stm_line_spectrum_tool/research_quicklooks/20261013_second_derivative",
+      "entry": "analyze_derivatives.py",
+      "mode": "ai",
+      "description": "复用原有谱线导数分析；先确认平滑窗口和偏压单位。",
+      "dependencies": "Python · NumPy · SciPy · Matplotlib",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "gap",
+      "name": "能隙分析",
+      "category": "谱学分析",
+      "folder": "modules/stm_line_spectrum_tool/research_quicklooks/20261011_peak_position_gap",
+      "entry": "analyze.py",
+      "mode": "ai",
+      "description": "与峰位分析共享既有脚本；先明确能隙定义和要分析的区域。",
+      "dependencies": "Python 科学计算环境 · 既有分析输入",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    },
+    {
+      "id": "periodicity",
+      "name": "周期性分析",
+      "category": "谱学分析",
+      "folder": "modules/stm_line_spectrum_tool/research_quicklooks/20261013_second_derivative",
+      "entry": "analyze_lines_v3.py",
+      "mode": "ai",
+      "description": "谱线特征实空间/频率分析；二维筛查另见关联目录。",
+      "dependencies": "Python · NumPy · SciPy · Matplotlib · 上游结果",
+      "agent_context": [
+        "AGENTS.md",
+        "docs/MIGRATION.md"
+      ]
+    }
+  ]
+}

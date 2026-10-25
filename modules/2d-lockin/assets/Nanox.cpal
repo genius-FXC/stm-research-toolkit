@@ -1,0 +1,11 @@
+[ramp]
+indexes=0,84,168,252
+colors=41DC,FF0000,0,732100,B47700,FFFFFF
+[colors]
+bkg=5A5A5A
+info=FFFFFF
+piezo=FF24
+frame=FFCD00
+line=FFFFFF
+grid=0
+tip=DC002C
